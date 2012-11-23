@@ -15,8 +15,10 @@ module Sigimera
         # This method returns the latest 10 crises.
         #
         # @return [Array] Returns an array of crises objects in JSON
-        def get_latest_crises
-            response = get("/v1/crises?auth_token=#{@auth_token}")
+        def get_latest_crises(type = nil)
+            endpoint = "/v1/crises?auth_token=#{@auth_token}"
+            endpoint += "&type=#{type}" if type
+            response = get(endpoint)
             JSON.parse response.body if response
         end
     end
