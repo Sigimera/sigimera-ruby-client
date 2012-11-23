@@ -5,11 +5,20 @@ module Sigimera
     # Copyright::   Copyright (c) 2012 Sigimera
     # License::     Closed Source
     module VERSION
+        # The major version number that changes only if incompatibility with
+        # the previous version was introduced.
         MAJOR = 0
+
+        # The minor version number indicates that new features were added.
         MINOR = 0
+
+        # The tiny number stands for bug fixes.
         TINY  = 1
+
+        # The extra string marks the version as beta, alpha, rcX, ...
         EXTRA = "alpha"
 
+        # Concatenates the version to a point separated string
         STRING = [MAJOR, MINOR, TINY].join('.')
         STRING << ".#{EXTRA}" if EXTRA
 
