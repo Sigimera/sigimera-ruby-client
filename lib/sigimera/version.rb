@@ -1,4 +1,33 @@
 module Sigimera
-	# The library version.
-    VERSION = "0.0.1"
+    # Part of the Sigimera Platform
+    #
+    # Author::      Alex Oberhauser (mailto:alex.oberhauser@sigimera.org)
+    # Copyright::   Copyright (c) 2012 Sigimera
+    # License::     Closed Source
+    module VERSION
+        MAJOR = 0
+        MINOR = 0
+        TINY  = 1
+        EXTRA = "alpha"
+
+        STRING = [MAJOR, MINOR, TINY].join('.')
+        STRING << ".#{EXTRA}" if EXTRA
+
+        ##
+        # @return [String]
+        def self.to_s()
+            STRING
+        end
+
+        ##
+        # @return [String]
+        def self.to_str()
+            STRING
+        end
+        ##
+        # @return [Array(Integer, Integer, Integer)]
+        def self.to_a()
+            [MAJOR, MINOR, TINY]
+        end
+    end
 end
