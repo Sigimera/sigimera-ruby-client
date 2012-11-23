@@ -1,3 +1,5 @@
+require "json"
+
 module Sigimera
     # The main class that could be used to access the REST API
     class Client
@@ -10,8 +12,12 @@ module Sigimera
             @auth_token = auth_token
         end
 
+        # This method returns the latest 10 crises.
+        #
+        # @return [Array] Returns an array of crises objects in JSON
         def get_latest_crises
-            get("/v1/crises?auth_token=#{@auth_token}")
+            response = get("/v1/crises?auth_token=#{@auth_token}")
+            JSON.parse response.body if response
         end
     end
 end

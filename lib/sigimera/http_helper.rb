@@ -4,6 +4,9 @@ module Sigimera
     # Encapsulates the low level HTTPS calls.
     module HttpHelper
 
+    	# GET endpoint
+    	#
+    	# @param [String] endpoint The endpoint that should be called.
     	def get(endpoint)
     		uri, http = get_connection(endpoint)
     		
