@@ -7,7 +7,7 @@ describe Sigimera::Client do
 		@auth_token = ENV['AUTH_TOKEN']
 	end
 
-    it "Get latest crises" do
+    it "#get_latest_crises" do
         client = Sigimera::Client.new(auth_token = @auth_token)
         crises = client.get_latest_crises
         crises.class.should eql(Array)
@@ -19,7 +19,7 @@ describe Sigimera::Client do
         end
     end
 
-    it "Get latest earthquakes" do
+    it "#get_latest_crises(type = 'earthquakes')" do
     	sleep 1 # Respect the courtesy limit and wait for one second
 		client = Sigimera::Client.new(auth_token = @auth_token)
         crises = client.get_latest_crises(type = "earthquakes")
@@ -33,7 +33,7 @@ describe Sigimera::Client do
         end
     end
 
-    it "Get latest floods" do
+    it "#get_latest_crises(type = 'floods')" do
     	sleep 1 # Respect the courtesy limit and wait for one second
 		client = Sigimera::Client.new(auth_token = @auth_token)
         crises = client.get_latest_crises(type = "floods")
@@ -47,7 +47,7 @@ describe Sigimera::Client do
         end
     end
 
-	it "Get latest cyclones" do
+	it "#get_latest_crises(type = 'cyclones')" do
 		sleep 1 # Respect the courtesy limit and wait for one second
 		client = Sigimera::Client.new(auth_token = @auth_token)
         crises = client.get_latest_crises(type = "cyclones")
