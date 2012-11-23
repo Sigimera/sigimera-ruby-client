@@ -20,6 +20,17 @@ gem 'sigimera'
 ```
 
 
+Start RSpec Tests
+-----------------
+
+In order to test this library with the help of rspec you have get first an
+_authentication token_ under the [Developer Dashboard](http://api.sigimera.org/dashboard)
+
+```sh
+export AUTH_TOKEN=YourSecretToken
+rake spec
+```
+
 API Documentation
 -----------------
 

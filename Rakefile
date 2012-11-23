@@ -6,3 +6,11 @@ rescue LoadError
 end
 
 Bundler::GemHelper.install_tasks
+
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec) do |t|
+    t.fail_on_error = true
+    t.rspec_opts = "--colour --format doc"
+end
+
+task :default => :spec

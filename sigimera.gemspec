@@ -13,4 +13,8 @@ Gem::Specification.new do |s|
     s.description   = "This is a ruby library that encapsulates access to the Sigimera REST API."
     s.files         = `git ls-files`.split("\n")
     s.require_paths = [ "lib" ]
+
+    s.add_development_dependency "rake"
+    s.add_development_dependency "rspec"
+    s.add_development_dependency "spork"
 end
