@@ -14,5 +14,6 @@ module Sigimera
 	CACERT_FILE	= File.expand_path("../../certs/cacert.crt", __FILE__)
 end
 
+require "sigimera/version"
 require "sigimera/http_helper"
 require "sigimera/client"
