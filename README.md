@@ -38,6 +38,8 @@ irb
 >> client = Sigimera::Client.new("YourSecretToken")
 >> puts client.get_latest_crises
 >> puts client.get_latest_crises(type = "earthquakes")
+>> puts client.get_crises_stat
+>> puts client.get_user_stat
 ```
 
 
