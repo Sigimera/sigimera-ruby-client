@@ -16,7 +16,7 @@ module Sigimera
         TINY  = 1
 
         # The extra string marks the version as beta, alpha, rcX, ...
-        EXTRA = "rc1"
+        EXTRA = "rc2"
 
         # Concatenates the version to a point separated string
         STRING = [MAJOR, MINOR, TINY].join('.')
