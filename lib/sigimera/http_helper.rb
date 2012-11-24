@@ -33,7 +33,7 @@ module Sigimera
 
         private
 
-        # @params [String] endpoint The endpoint that should be called.
+        # @param [String] endpoint The endpoint that should be called.
         # @return [Array] First is the URI and second the HTTP object.
         def get_connection(endpoint)
             uri = URI(API_HOST + endpoint)

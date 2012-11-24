@@ -20,6 +20,27 @@ gem 'sigimera'
 ```
 
 
+Usage
+-----
+
+This examples are only a short outline how to use the library. For more
+information read the documentation, checkout the rspecs or look into the
+source code. To use the library include or execute the following lines:
+
+```sh
+irb
+>> require "sigimera"
+>> puts Sigimera::Client.get_api_version
+>> puts Sigimera::Client.get_public_crises
+>> puts Sigimera::Client.get_public_rss_feed
+
+# see http://api.sigimera.org/dashboard
+>> client = Sigimera::Client.new("YourSecretToken")
+>> puts client.get_latest_crises
+>> puts client.get_latest_crises(type = "earthquakes")
+```
+
+
 Start RSpec Tests
 -----------------
 

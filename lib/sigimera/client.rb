@@ -45,7 +45,7 @@ module Sigimera
 
         # This method returns the latest 10 crises.
         #
-        # @params [String] type The crises type, e.g. earthquake, flood, cyclone, volcanoe
+        # @param [String] type The crises type, e.g. earthquake, flood, cyclone, volcanoe
         # @return [Array] Returns an array of crises objects in JSON
         def get_latest_crises(type = nil)
             endpoint = "/v1/crises?auth_token=#{@auth_token}"
