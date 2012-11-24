@@ -7,6 +7,30 @@ describe Sigimera::Client do
 		@auth_token = ENV['AUTH_TOKEN']
 	end
 
+    it ".get_api_version" do
+        api_version = Sigimera::Client.get_api_version
+        api_version.class.should eql(String)
+        api_version.should start_with("1.")
+    end
+
+    it ".get_public_crises" do
+        crises = Sigimera::Client.get_public_crises
+        crises.class.should eql(Array)
+        crises.size.should == 10
+        crises.each do |crisis|
+            crisis.class.should eql(Hash)
+            crisis['_id'].class.should eql(String)
+            crisis['_id'].should_not be_empty
+        end
+    end
+
+    it ".get_public_rss_feed" do
+        crises = Sigimera::Client.get_public_rss_feed
+        crises.class.should eql(Nokogiri::XML::Document)
+        crises.xpath("/rss/channel/link/text()").to_s.should eql("http://www.sigimera.org/")
+        crises.xpath("/rss/channel/item").size.should == 10
+    end
+
     it "#get_latest_crises" do
         client = Sigimera::Client.new(auth_token = @auth_token)
         crises = client.get_latest_crises
@@ -20,13 +44,13 @@ describe Sigimera::Client do
     end
 
     it "#get_latest_crises(type = 'earthquakes')" do
-    	sleep 1 # Respect the courtesy limit and wait for one second
-		client = Sigimera::Client.new(auth_token = @auth_token)
+        sleep 1 # Respect the courtesy limit and wait for one second
+        client = Sigimera::Client.new(auth_token = @auth_token)
         crises = client.get_latest_crises(type = "earthquakes")
         crises.class.should eql(Array)
         crises.size.should == 10
         crises.each do |crisis|
-        	crisis['dc_subject'].first.should eql("earthquake")
+            crisis['dc_subject'].first.should eql("earthquake")
             crisis.class.should eql(Hash)
             crisis['_id'].class.should eql(String)
             crisis['_id'].should_not be_empty
@@ -34,27 +58,40 @@ describe Sigimera::Client do
     end
 
     it "#get_latest_crises(type = 'floods')" do
-    	sleep 1 # Respect the courtesy limit and wait for one second
-		client = Sigimera::Client.new(auth_token = @auth_token)
+        sleep 1 # Respect the courtesy limit and wait for one second
+        client = Sigimera::Client.new(auth_token = @auth_token)
         crises = client.get_latest_crises(type = "floods")
         crises.class.should eql(Array)
         crises.size.should == 10
         crises.each do |crisis|
-        	crisis['dc_subject'].first.should eql("flood")
+            crisis['dc_subject'].first.should eql("flood")
             crisis.class.should eql(Hash)
             crisis['_id'].class.should eql(String)
             crisis['_id'].should_not be_empty
         end
     end
 
-	it "#get_latest_crises(type = 'cyclones')" do
-		sleep 1 # Respect the courtesy limit and wait for one second
-		client = Sigimera::Client.new(auth_token = @auth_token)
+    it "#get_latest_crises(type = 'cyclones')" do
+        sleep 1 # Respect the courtesy limit and wait for one second
+        client = Sigimera::Client.new(auth_token = @auth_token)
         crises = client.get_latest_crises(type = "cyclones")
         crises.class.should eql(Array)
         crises.size.should == 10
         crises.each do |crisis|
-        	crisis['dc_subject'].sort.last.should eql("tropical cyclones")
+            crisis['dc_subject'].sort.last.should eql("tropical cyclones")
+            crisis.class.should eql(Hash)
+            crisis['_id'].class.should eql(String)
+            crisis['_id'].should_not be_empty
+        end
+    end
+
+    it "#get_latest_crises(type = 'volcanoes')" do
+        sleep 1 # Respect the courtesy limit and wait for one second
+        client = Sigimera::Client.new(auth_token = @auth_token)
+        crises = client.get_latest_crises(type = "volcanoes")
+        crises.class.should eql(Array)
+        crises.size.should > 1
+        crises.each do |crisis|
             crisis.class.should eql(Hash)
             crisis['_id'].class.should eql(String)
             crisis['_id'].should_not be_empty
