@@ -115,6 +115,6 @@ describe Sigimera::Client do
 
         sleep 1 # Respect the courtesy limit and wait for one second
         second_user_stat = client.get_user_stat
-        second_user_stat['api_calls']['number_of_calls'].should == (number_of_calls + 1)
+        second_user_stat['api_calls']['number_of_calls'].should >= (number_of_calls + 1)
     end
 end
