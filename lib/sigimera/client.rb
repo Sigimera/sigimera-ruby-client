@@ -19,7 +19,7 @@ module Sigimera
         # @return [String] The first found version string of the API
         def self.get_api_version
             client = Sigimera::Client.new
-            response = client.head("/public/crises")
+            response = client.head("/public/crises.json")
             response.get_fields("X-API-Version").first.to_s if response.key?("X-API-Version")
         end
 
@@ -29,7 +29,7 @@ module Sigimera
         # @return [Array] Returns an array of crises objects in JSON
         def self.get_public_crises
             client = Sigimera::Client.new
-            response = client.get("/public/crises")
+            response = client.get("/public/crises.json")
             JSON.parse response.body if response
         end
 
@@ -48,9 +48,25 @@ module Sigimera
         # @param [String] type The crises type, e.g. earthquake, flood, cyclone, volcanoe
         # @return [Array] Returns an array of crises objects in JSON
         def get_latest_crises(type = nil)
-            endpoint = "/v1/crises?auth_token=#{@auth_token}"
+            endpoint = "/v1/crises.json?auth_token=#{@auth_token}"
             endpoint += "&type=#{type}" if type
             response = self.get(endpoint)
+            JSON.parse response.body if response
+        end
+
+        # This method returns statistic information about the crises.
+        # 
+        # @return [Array] Returns the crises statistic as JSON object
+        def get_crises_stat
+            response = self.get("/v1/stats/crises.json?auth_token=#{@auth_token}")
+            JSON.parse response.body if response
+        end
+
+        # This method returns statistic information about user.
+        # 
+        # @return [Array] Returns the user statistic as JSON object
+        def get_user_stat
+            response = self.get("/v1/stats/users.json?auth_token=#{@auth_token}")
             JSON.parse response.body if response
         end
     end
