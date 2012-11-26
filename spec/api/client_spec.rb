@@ -3,9 +3,20 @@ require "spec_helper"
 describe Sigimera::Client do
 
 	before(:all) do
-		ENV['AUTH_TOKEN'].should_not be_empty
 		@auth_token = ENV['AUTH_TOKEN']
+        @username = ENV['USERNAME']
+        @password = ENV['PASSWORD']
 	end
+
+    it ".get_auth_token(username, password)" do
+        if @username and @password
+            auth_token = Sigimera::Client.get_auth_token(username = @username, password = @password)
+            auth_token.class.should eql(String)
+            auth_token.should_not be_empty
+        else
+            pending "Please specify ENV['USERNAME'] and ENV['PASSWORD']"
+        end
+    end
 
     it ".get_api_version" do
         api_version = Sigimera::Client.get_api_version
@@ -32,89 +43,119 @@ describe Sigimera::Client do
     end
 
     it "#get_latest_crises" do
-        client = Sigimera::Client.new(auth_token = @auth_token)
-        crises = client.get_latest_crises
-        crises.class.should eql(Array)
-        crises.size.should == 10
-        crises.each do |crisis|
-            crisis.class.should eql(Hash)
-            crisis['_id'].class.should eql(String)
-            crisis['_id'].should_not be_empty
+        if @auth_token
+            sleep 1 # Respect the courtesy limit and wait for one second
+            client = Sigimera::Client.new(auth_token = @auth_token)
+            crises = client.get_latest_crises
+            crises.class.should eql(Array)
+            crises.size.should == 10
+            crises.each do |crisis|
+                crisis.class.should eql(Hash)
+                crisis['_id'].class.should eql(String)
+                crisis['_id'].should_not be_empty
+            end
+        else
+            pending "Plese specify ENV['AUTH_TOKEN']"
         end
     end
 
     it "#get_latest_crises(type = 'earthquakes')" do
-        sleep 1 # Respect the courtesy limit and wait for one second
-        client = Sigimera::Client.new(auth_token = @auth_token)
-        crises = client.get_latest_crises(type = "earthquakes")
-        crises.class.should eql(Array)
-        crises.size.should == 10
-        crises.each do |crisis|
-            crisis['dc_subject'].first.should eql("earthquake")
-            crisis.class.should eql(Hash)
-            crisis['_id'].class.should eql(String)
-            crisis['_id'].should_not be_empty
+        if @auth_token
+            sleep 1 # Respect the courtesy limit and wait for one second
+            client = Sigimera::Client.new(auth_token = @auth_token)
+            crises = client.get_latest_crises(type = "earthquakes")
+            crises.class.should eql(Array)
+            crises.size.should == 10
+            crises.each do |crisis|
+                crisis['dc_subject'].first.should eql("earthquake")
+                crisis.class.should eql(Hash)
+                crisis['_id'].class.should eql(String)
+                crisis['_id'].should_not be_empty
+            end
+        else
+            pending "Plese specify ENV['AUTH_TOKEN']"
         end
     end
 
     it "#get_latest_crises(type = 'floods')" do
-        sleep 1 # Respect the courtesy limit and wait for one second
-        client = Sigimera::Client.new(auth_token = @auth_token)
-        crises = client.get_latest_crises(type = "floods")
-        crises.class.should eql(Array)
-        crises.size.should == 10
-        crises.each do |crisis|
-            crisis['dc_subject'].first.should eql("flood")
-            crisis.class.should eql(Hash)
-            crisis['_id'].class.should eql(String)
-            crisis['_id'].should_not be_empty
+        if @auth_token
+            sleep 1 # Respect the courtesy limit and wait for one second
+            client = Sigimera::Client.new(auth_token = @auth_token)
+            crises = client.get_latest_crises(type = "floods")
+            crises.class.should eql(Array)
+            crises.size.should == 10
+            crises.each do |crisis|
+                crisis['dc_subject'].first.should eql("flood")
+                crisis.class.should eql(Hash)
+                crisis['_id'].class.should eql(String)
+                crisis['_id'].should_not be_empty
+            end
+        else
+            pending "Plese specify ENV['AUTH_TOKEN']"
         end
     end
 
     it "#get_latest_crises(type = 'cyclones')" do
-        sleep 1 # Respect the courtesy limit and wait for one second
-        client = Sigimera::Client.new(auth_token = @auth_token)
-        crises = client.get_latest_crises(type = "cyclones")
-        crises.class.should eql(Array)
-        crises.size.should == 10
-        crises.each do |crisis|
-            crisis['dc_subject'].sort.last.should eql("tropical cyclones")
-            crisis.class.should eql(Hash)
-            crisis['_id'].class.should eql(String)
-            crisis['_id'].should_not be_empty
+        if @auth_token
+            sleep 1 # Respect the courtesy limit and wait for one second
+            client = Sigimera::Client.new(auth_token = @auth_token)
+            crises = client.get_latest_crises(type = "cyclones")
+            crises.class.should eql(Array)
+            crises.size.should == 10
+            crises.each do |crisis|
+                crisis['dc_subject'].sort.last.should eql("tropical cyclones")
+                crisis.class.should eql(Hash)
+                crisis['_id'].class.should eql(String)
+                crisis['_id'].should_not be_empty
+            end
+        else
+            pending "Plese specify ENV['AUTH_TOKEN']"
         end
     end
 
     it "#get_latest_crises(type = 'volcanoes')" do
-        sleep 1 # Respect the courtesy limit and wait for one second
-        client = Sigimera::Client.new(auth_token = @auth_token)
-        crises = client.get_latest_crises(type = "volcanoes")
-        crises.class.should eql(Array)
-        crises.size.should > 1
-        crises.each do |crisis|
-            crisis.class.should eql(Hash)
-            crisis['_id'].class.should eql(String)
-            crisis['_id'].should_not be_empty
+        if @auth_token
+            sleep 1 # Respect the courtesy limit and wait for one second
+            client = Sigimera::Client.new(auth_token = @auth_token)
+            crises = client.get_latest_crises(type = "volcanoes")
+            crises.class.should eql(Array)
+            crises.size.should > 1
+            crises.each do |crisis|
+                crisis.class.should eql(Hash)
+                crisis['_id'].class.should eql(String)
+                crisis['_id'].should_not be_empty
+            end
+        else
+            pending "Plese specify ENV['AUTH_TOKEN']"
         end
     end
 
     it "#get_crises_stat" do
-        sleep 1 # Respect the courtesy limit and wait for one second
-        client = Sigimera::Client.new(auth_token = @auth_token)
-        crises_stat = client.get_crises_stat
-        crises_stat['first_crisis_at'].should eql("2012-03-07T00:00:00Z")
-        crises_stat['total_crises'].class.should eql(Fixnum)
+        if @auth_token
+            sleep 1 # Respect the courtesy limit and wait for one second
+            client = Sigimera::Client.new(auth_token = @auth_token)
+            crises_stat = client.get_crises_stat
+            crises_stat['first_crisis_at'].should eql("2012-03-07T00:00:00Z")
+            crises_stat['total_crises'].class.should eql(Fixnum)
+        else
+            pending "Plese specify ENV['AUTH_TOKEN']"
+        end
     end
 
     it "#get_user_stat" do
-        sleep 1 # Respect the courtesy limit and wait for one second
-        client = Sigimera::Client.new(auth_token = @auth_token)
-        user_stat = client.get_user_stat
-        number_of_calls = user_stat['api_calls']['number_of_calls']
-        number_of_calls.should > 0
+        if @auth_token
+            sleep 1 # Respect the courtesy limit and wait for one second
+            client = Sigimera::Client.new(auth_token = @auth_token)
+            user_stat = client.get_user_stat
+            number_of_calls = user_stat['api_calls']['number_of_calls']
+            number_of_calls.should > 0
 
-        sleep 1 # Respect the courtesy limit and wait for one second
-        second_user_stat = client.get_user_stat
-        second_user_stat['api_calls']['number_of_calls'].should >= (number_of_calls + 1)
+            sleep 1 # Respect the courtesy limit and wait for one second
+            second_user_stat = client.get_user_stat
+            second_user_stat['api_calls']['number_of_calls'].should >= (number_of_calls + 1)
+        else
+            pending "Plese specify ENV['AUTH_TOKEN']"
+        end
     end
+
 end

@@ -12,7 +12,7 @@ module Sigimera
 
         def initialize(auth_token = nil, username = nil, password = nil)
             @auth_token = auth_token if auth_token
-            @auth_token = get_auth(username, password) if username and password
+            @auth_token = self.get_auth_token(username, password) if username and password
         end
 
         # This method returns current API version. For this purpose
@@ -45,6 +45,21 @@ module Sigimera
             Nokogiri::XML(response.body) if response
         end
 
+
+        # This method returns an authentication token. If the auth_token
+        # exists it is returned, otherwise a new one is created.
+        #
+        # @param [String] username The username (email) that is used for the basic authentication
+        # @param [String] password The password that is used for the basic authentication
+        # @return [String] The authentication token as string
+        def self.get_auth_token(username, password)
+            basic_hash = Base64.strict_encode64("#{username}:#{password}")
+            client = Sigimera::Client.new
+            response = client.post("/v1/tokens.json", basic_hash)
+            json = JSON.parse response.body if response
+            json['auth_token'].to_s if json
+        end
+
         # This method returns the latest 10 crises.
         #
         # @param [String] type The crises type, e.g. earthquake, flood, cyclone, volcanoe
@@ -70,18 +85,6 @@ module Sigimera
         def get_user_stat
             response = self.get("/v1/stats/users.json?auth_token=#{@auth_token}")
             JSON.parse response.body if response
-        end
-
-        # This method returns an authentication token. If the auth_token
-        # exists it is returned, otherwise a new one is created.
-        #
-        # @param [String] username The username (email) that is used for the basic authentication
-        # @param [String] password The password that is used for the basic authentication
-        # @return [String] The authentication token as string
-        def self.get_auth_token(username, password)
-            basic_hash = Base64.strict_encode64("#{username}:#{password}")
-            response = self.post("/v1/tokens.json", basic_hash)
-            response.body['auth_token'].to_s if response and response.body
         end
 
     end
