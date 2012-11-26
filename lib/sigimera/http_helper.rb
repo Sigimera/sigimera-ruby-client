@@ -60,8 +60,6 @@ module Sigimera
                 http.ca_file = CACERT_FILE
                 http.verify_mode = OpenSSL::SSL::VERIFY_PEER
                 http.verify_depth = 5
-            else
-                raise "Please use a secure SSL connection and the right root certificate. If you experience problems please contact support@sigimera.org."
             end
 
             return uri, http
