@@ -69,6 +69,11 @@ export AUTH_TOKEN=YourSecretToken
 rake spec
 ```
 
+The following continuous integration tests includes only the public accessible endpoints.
+
+[![Build
+Status](https://secure.travis-ci.org/Sigimera/sigimera-ruby-client.png?branch=master)](https://travis-ci.org/Sigimera/sigimera-ruby-client)
+
 API Documentation
 -----------------
 
