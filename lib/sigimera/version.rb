@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Sigimera
     # Part of the Sigimera Platform
     #

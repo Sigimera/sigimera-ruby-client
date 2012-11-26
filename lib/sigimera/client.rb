@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require "json"
 require "nokogiri"
 require "base64"
