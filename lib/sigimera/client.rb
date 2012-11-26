@@ -1,5 +1,6 @@
 require "json"
 require "nokogiri"
+require "base64"
 
 module Sigimera
     # The main class that could be used to access the REST API
@@ -9,8 +10,9 @@ module Sigimera
         # The authentication token that is used for the API calls.
         attr_reader :auth_token
 
-        def initialize(auth_token = nil)
-            @auth_token = auth_token
+        def initialize(auth_token = nil, username = nil, password = nil)
+            @auth_token = auth_token if auth_token
+            @auth_token = get_auth(username, password) if username and password
         end
 
         # This method returns current API version. For this purpose
@@ -55,7 +57,7 @@ module Sigimera
         end
 
         # This method returns statistic information about the crises.
-        # 
+        #
         # @return [Array] Returns the crises statistic as JSON object
         def get_crises_stat
             response = self.get("/v1/stats/crises.json?auth_token=#{@auth_token}")
@@ -63,11 +65,24 @@ module Sigimera
         end
 
         # This method returns statistic information about user.
-        # 
+        #
         # @return [Array] Returns the user statistic as JSON object
         def get_user_stat
             response = self.get("/v1/stats/users.json?auth_token=#{@auth_token}")
             JSON.parse response.body if response
         end
+
+        # This method returns an authentication token. If the auth_token
+        # exists it is returned, otherwise a new one is created.
+        #
+        # @param [String] username The username (email) that is used for the basic authentication
+        # @param [String] password The password that is used for the basic authentication
+        # @return [String] The authentication token as string
+        def self.get_auth_token(username, password)
+            basic_hash = Base64.strict_encode64("#{username}:#{password}")
+            response = self.post("/v1/tokens.json", basic_hash)
+            response.body['auth_token'].to_s if response and response.body
+        end
+
     end
 end

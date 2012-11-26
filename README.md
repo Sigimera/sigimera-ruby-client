@@ -7,17 +7,24 @@ This repository includes a ruby client library for the REST API under http://api
 Installation
 ------------
 
-Install _sigimera_ manually from command line:
-
-```sh
-gem install sigimera
-```
-
-Add _sigimera_ to your Gemfile:
+Add this line to your application's Gemfile:
 
 ```ruby
 gem 'sigimera'
 ```
+
+And then execute:
+
+```sh
+$ bundle
+```
+
+Or install it yourself as:
+
+```sh
+$ gem install test
+```
+
 
 
 Usage
@@ -33,9 +40,14 @@ irb
 >> puts Sigimera::Client.get_api_version
 >> puts Sigimera::Client.get_public_crises
 >> puts Sigimera::Client.get_public_rss_feed
+>> puts Sigimera::Client.get_auth_token("johndoe@example.org", "verySecretPassword")
 
 # see http://api.sigimera.org/dashboard
 >> client = Sigimera::Client.new("YourSecretToken")
+or
+# The username and password are NOT stored, but only used to fetch an
+# authentication token
+>> client = Sigimera::Client.new(username = "johndoe@example.org", password = "verySecretPassword")
 >> puts client.get_latest_crises
 >> puts client.get_latest_crises(type = "earthquakes")
 >> puts client.get_crises_stat

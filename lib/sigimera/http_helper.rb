@@ -18,6 +18,22 @@ module Sigimera
             http.request(req)
         end
 
+        # POST endpoint
+        #
+        # @param [String] endpoint The endpoint that should be called.
+        # @param [String] basic_hash Base64.strict_encode64("username:password")
+        # @return [Net::HTTPResponse] The HTTP response object
+        def post(endpoint, basic_hash = nil)
+            uri, http = get_connection(endpoint)
+
+            req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}")
+            req.add_field("Content-Type", "application/json")
+            req.add_field("User-Agent", "Sigimera Ruby Client v#{Sigimera::VERSION}")
+            req.add_field("Authorization", "Basic #{basic_hash}") if basic_hash
+
+            http.request(req)
+        end
+
         # HEAD endpoint
         #
         # @param [String] endpoint The endpoint that should be called.
