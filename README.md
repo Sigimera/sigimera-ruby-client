@@ -1,7 +1,10 @@
 Sigimera Client
 ===============
 
-This repository includes a ruby client library for the REST API under http://api.sigimera.org.
+The following ruby gem encapsulates access to the Sigimera REST API under
+http://api.sigimera.org. It includes the needed SSL certificate for the
+HTTPS connections and a detailed documentation. This library will be
+developed in parallel to the API.
 
 
 Installation
