@@ -7,9 +7,6 @@ module Sigimera
     class Client
         include Sigimera::HttpHelper
 
-        # The authentication token that is used for the API calls.
-        attr_reader :auth_token
-
         def initialize(auth_token = nil, username = nil, password = nil)
             @auth_token = auth_token if auth_token
             @auth_token = self.get_auth_token(username, password) if username and password
@@ -86,6 +83,10 @@ module Sigimera
             response = self.get("/v1/stats/users.json?auth_token=#{@auth_token}")
             JSON.parse response.body if response
         end
+
+        private
+        # The authentication token that is used for the API calls.
+        attr_reader :auth_token
 
     end
 end
