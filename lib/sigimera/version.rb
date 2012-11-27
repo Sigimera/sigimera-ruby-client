@@ -1,10 +1,6 @@
 # encoding: UTF-8
 module Sigimera
-    # Part of the Sigimera Platform
-    #
-    # Author::      Alex Oberhauser (mailto:alex.oberhauser@sigimera.org)
-    # Copyright::   Copyright (c) 2012 Sigimera
-    # License::     Closed Source
+    # Module that encapsulates the version number.
     module VERSION
         # The major version number that changes only if incompatibility with
         # the previous version was introduced.
