@@ -25,7 +25,7 @@ $ bundle
 Or install it yourself as:
 
 ```sh
-$ gem install test
+$ gem install sigimera
 ```
 
 
