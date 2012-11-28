@@ -60,7 +60,7 @@ module Sigimera
 
         # This method returns the latest 10 crises.
         #
-        # @param [String] type The crises type, e.g. earthquake, flood, cyclone, volcanoe
+        # @param [String] params A hash that contains the http parameters for the call, e.g. { :type => "earthquake", :level => "red", :output => "short" }
         # @return [Array] Returns an array of crises objects in JSON
         def get_latest_crises(params = nil)
             endpoint = "/v1/crises.json?auth_token=#{@auth_token}"
