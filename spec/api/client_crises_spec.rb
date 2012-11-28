@@ -23,7 +23,7 @@ describe Sigimera::Client do
         end
     end
 
-    it "#get_latest_crises(type = 'earthquakes')" do
+    it "#get_latest_crises({ :type => 'earthquakes' })" do
         sleep 1 # Respect the courtesy limit and wait for one second
         crises =  @client.get_latest_crises({ :type => "earthquakes" })
         crises.class.should eql(Array)
@@ -36,7 +36,7 @@ describe Sigimera::Client do
         end
     end
 
-    it "#get_latest_crises(type = 'floods')" do
+    it "#get_latest_crises({ :type => 'floods' })" do
         sleep 1 # Respect the courtesy limit and wait for one second
         crises = @client.get_latest_crises({ :type => "floods" })
         crises.class.should eql(Array)
@@ -49,7 +49,7 @@ describe Sigimera::Client do
         end
     end
 
-    it "#get_latest_crises(type = 'cyclones')" do
+    it "#get_latest_crises({ :type => 'cyclones' })" do
         sleep 1 # Respect the courtesy limit and wait for one second
         crises = @client.get_latest_crises({ :type => "cyclones" })
         crises.class.should eql(Array)
@@ -62,7 +62,7 @@ describe Sigimera::Client do
         end
     end
 
-    it "#get_latest_crises(type = 'volcanoes')" do
+    it "#get_latest_crises({ :type => 'volcanoes' })" do
         sleep 1 # Respect the courtesy limit and wait for one second
         crises = @client.get_latest_crises({ :type => "volcanoes" })
         crises.class.should eql(Array)
@@ -74,6 +74,24 @@ describe Sigimera::Client do
         end
     end
 
+    it "#get_latest_crises({ :type => 'volcanoes', :output => 'short' })" do
+        sleep 1 # Respect the courtesy limit and wait for one second
+        crises = @client.get_latest_crises({ :type => "volcanoes", :output => "short" })
+        crises.class.should eql(Array)
+        crises.size.should > 1
+        crises.each do |crisis|
+            crisis.class.should eql(Hash)
+            crisis['_id'].class.should eql(String)
+            crisis['_id'].should_not be_empty
+        end
+    end
+
+    it "#get_latest_crises({ :type => 'not_available' })" do
+        sleep 1 # Respect the courtesy limit and wait for one second
+        crises = @client.get_latest_crises({ :type => "not_available" })
+        crises.class.should eql(NilClass)
+    end
+
     it "#get_crisis(identifier)" do
         sleep 1 # Respect the courtesy limit and wait for one second
         id = "a8763f7e2c432ebe897a68706dcf8dd49243774d"
@@ -81,6 +99,8 @@ describe Sigimera::Client do
         crisis.class.should eql(Hash)
         crisis['_id'].should eql(id)
         crisis['dc_title'].should eql("Green flood alert in Australia")
+        crisis['dc_subject'].class.should eql(Array)
+        crisis['dc_subject'].size.should > 0
 
         sleep 1 # Respect the courtesy limit and wait for one second
         crisis = @client.get_crisis("")
@@ -97,6 +117,8 @@ describe Sigimera::Client do
         crisis = @client.get_crisis(id, { :output => 'short' })
         crisis.class.should eql(Hash)
         crisis['_id'].should eql(id)
+        crisis['subject'].class.should eql(String)
+        crisis['subject'].should eql("flood")
         crisis['dc_title'].should eql("Green flood alert in Australia")
     end
 

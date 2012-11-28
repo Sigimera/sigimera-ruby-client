@@ -55,7 +55,7 @@ module Sigimera
             client = Sigimera::Client.new
             response = client.post("/v1/tokens.json", basic_hash)
             json = JSON.parse response.body if response
-            json['auth_token'].to_s if json
+            json['auth_token'].to_s if json and json['auth_token']
         end
 
         # This method returns the latest 10 crises.
@@ -66,7 +66,7 @@ module Sigimera
             endpoint = "/v1/crises.json?auth_token=#{@auth_token}"
             endpoint += "&#{URI.encode_www_form params}" if params
             response = self.get(endpoint.to_s)
-            JSON.parse response.body if response
+            JSON.parse response.body if response and response.body
         end
 
         # This method returns a single crisis.
@@ -78,7 +78,7 @@ module Sigimera
             endpoint = "/v1/crises/#{identifier}.json?auth_token=#{@auth_token}"
             endpoint += "&#{URI.encode_www_form params}" if params
             response = self.get(endpoint)
-            JSON.parse response.body if response.body
+            JSON.parse response.body if response and response.body
         end
 
         # This method returns statistic information about the crises.
@@ -86,7 +86,7 @@ module Sigimera
         # @return [Array] Returns the crises statistic as JSON object
         def get_crises_stat
             response = self.get("/v1/stats/crises.json?auth_token=#{@auth_token}")
-            JSON.parse response.body if response
+            JSON.parse response.body if response and response.body
         end
 
         # This method returns statistic information about user.
@@ -94,7 +94,7 @@ module Sigimera
         # @return [Array] Returns the user statistic as JSON object
         def get_user_stat
             response = self.get("/v1/stats/users.json?auth_token=#{@auth_token}")
-            JSON.parse response.body if response
+            JSON.parse response.body if response and response.body
         end
 
         private
