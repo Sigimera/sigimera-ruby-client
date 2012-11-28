@@ -73,9 +73,11 @@ module Sigimera
         #
         # @param [String] identifier A unique crisis identifier
         # @return [Hash] The single crisis as JSON object
-        def get_crisis(identifier)
+        def get_crisis(identifier, params = nil)
             return nil if identifier.nil? or identifier.empty?
-            response = self.get("/v1/crises/#{identifier}.json?auth_token=#{@auth_token}")
+            endpoint = "/v1/crises/#{identifier}.json?auth_token=#{@auth_token}"
+            endpoint += "&#{URI.encode_www_form params}" if params
+            response = self.get(endpoint)
             JSON.parse response.body if response.body
         end
 
