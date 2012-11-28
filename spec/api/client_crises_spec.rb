@@ -25,7 +25,7 @@ describe Sigimera::Client do
 
     it "#get_latest_crises(type = 'earthquakes')" do
         sleep 1 # Respect the courtesy limit and wait for one second
-        crises =  @client.get_latest_crises(type = "earthquakes")
+        crises =  @client.get_latest_crises({ :type => "earthquakes" })
         crises.class.should eql(Array)
         crises.size.should == 10
         crises.each do |crisis|
@@ -38,7 +38,7 @@ describe Sigimera::Client do
 
     it "#get_latest_crises(type = 'floods')" do
         sleep 1 # Respect the courtesy limit and wait for one second
-        crises = @client.get_latest_crises(type = "floods")
+        crises = @client.get_latest_crises({ :type => "floods" })
         crises.class.should eql(Array)
         crises.size.should == 10
         crises.each do |crisis|
@@ -51,7 +51,7 @@ describe Sigimera::Client do
 
     it "#get_latest_crises(type = 'cyclones')" do
         sleep 1 # Respect the courtesy limit and wait for one second
-        crises = @client.get_latest_crises(type = "cyclones")
+        crises = @client.get_latest_crises({ :type => "cyclones" })
         crises.class.should eql(Array)
         crises.size.should == 10
         crises.each do |crisis|
@@ -64,7 +64,7 @@ describe Sigimera::Client do
 
     it "#get_latest_crises(type = 'volcanoes')" do
         sleep 1 # Respect the courtesy limit and wait for one second
-        crises = @client.get_latest_crises(type = "volcanoes")
+        crises = @client.get_latest_crises({ :type => "volcanoes" })
         crises.class.should eql(Array)
         crises.size.should > 1
         crises.each do |crisis|

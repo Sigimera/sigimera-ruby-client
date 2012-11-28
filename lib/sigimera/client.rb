@@ -62,10 +62,10 @@ module Sigimera
         #
         # @param [String] type The crises type, e.g. earthquake, flood, cyclone, volcanoe
         # @return [Array] Returns an array of crises objects in JSON
-        def get_latest_crises(type = nil)
+        def get_latest_crises(params = nil)
             endpoint = "/v1/crises.json?auth_token=#{@auth_token}"
-            endpoint += "&type=#{type}" if type
-            response = self.get(endpoint)
+            endpoint += "&#{URI.encode_www_form params}" if params
+            response = self.get(endpoint.to_s)
             JSON.parse response.body if response
         end
 

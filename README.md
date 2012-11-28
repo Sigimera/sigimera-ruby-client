@@ -55,7 +55,7 @@ or
 # authentication token
 >> client = Sigimera::Client.new(username = "johndoe@example.org", password = "verySecretPassword")
 >> puts client.get_latest_crises
->> puts client.get_latest_crises(type = "earthquakes")
+>> puts client.get_latest_crises({ :type => "earthquakes" })
 >> puts client.get_crises_stat
 >> puts client.get_user_stat
 ```
