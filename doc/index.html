@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.3
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><h1>Sigimera Client</h1>
+
+<p><a href="https://travis-ci.org/Sigimera/sigimera-ruby-client"><img src="https://secure.travis-ci.org/Sigimera/sigimera-ruby-client.png?branch=master" alt="Build
+Status"></a> <a href="https://codeclimate.com/github/Sigimera/sigimera-ruby-client"><img src="https://codeclimate.com/badge.png" alt="Code Climate"></a></p>
+
+<p>The following ruby gem encapsulates access to the Sigimera REST API under
+<a href="http://api.sigimera.org">http://api.sigimera.org</a>. It includes the needed SSL certificate for the
+HTTPS connections and a detailed documentation. This library will be
+developed in parallel to the API.</p>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application&#39;s Gemfile:</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sigimera</span><span class='tstring_end'>'</span></span>
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre class="code sh"><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre class="code sh"><code>$ gem install sigimera
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>This examples are only a short outline how to use the library. For more
+information read the documentation, checkout the rspecs or look into the
+source code. To use the library include or execute the following lines:</p>
+
+<pre class="code sh"><code>irb
+&gt;&gt; require &quot;sigimera&quot;
+&gt;&gt; puts Sigimera::Client.get_api_version
+&gt;&gt; puts Sigimera::Client.get_public_crises
+&gt;&gt; puts Sigimera::Client.get_public_rss_feed
+&gt;&gt; puts Sigimera::Client.get_auth_token(&quot;johndoe@example.org&quot;, &quot;verySecretPassword&quot;)
+
+# see http://api.sigimera.org/dashboard
+&gt;&gt; client = Sigimera::Client.new(&quot;YourSecretToken&quot;)
+or
+# The username and password are NOT stored, but only used to fetch an
+# authentication token
+&gt;&gt; client = Sigimera::Client.new(username = &quot;johndoe@example.org&quot;, password = &quot;verySecretPassword&quot;)
+&gt;&gt; puts client.get_latest_crises
+&gt;&gt; puts client.get_latest_crises({ :type =&gt; &quot;earthquakes&quot; })
+&gt;&gt; puts client.get_crises_stat
+&gt;&gt; puts client.get_user_stat
+</code></pre>
+
+<h2>Start RSpec Tests</h2>
+
+<p>In order to test this library with the help of rspec you have get first an
+<em>authentication token</em> under the <a href="http://api.sigimera.org/dashboard">Developer Dashboard</a></p>
+
+<pre class="code sh"><code>export AUTH_TOKEN=YourSecretToken
+rake spec
+</code></pre>
+
+<h2>API Documentation</h2>
+
+<p>This library simplifies the Sigimera REST API. If you want learn more about
+this API you can use the following links:</p>
+
+<ul>
+<li><a href="http://api.sigimera.org/quickstart">Quickstart</a></li>
+<li><a href="http://api.sigimera.org/faq">FAQ</a></li>
+<li><a href="http://api.sigimera.org/dashboard">Developer Dashboard</a>: You must be logged
+in.</li>
+</ul>
+
+<h2>License</h2>
+
+<p>(c) 2012 by <a href="http://www.sigimera.org">Sigimera</a>,
+published under MIT license.</p>
+
+<h2>Warranty</h2>
+
+<p>This software is provided &quot;as is&quot; and without any express or implied
+warranties, including, without limitation, the implied warranties of
+merchantibility and fitness for a particular purpose.</p>
+</div></div>
+
+    <div id="footer">
+  Generated on Wed Nov 28 20:13:18 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.3 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>
