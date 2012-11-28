@@ -69,6 +69,16 @@ module Sigimera
             JSON.parse response.body if response
         end
 
+        # This method returns a single crisis.
+        #
+        # @param [String] identifier A unique crisis identifier
+        # @return [Hash] The single crisis as JSON object
+        def get_crisis(identifier)
+            return nil if identifier.nil? or identifier.empty?
+            response = self.get("/v1/crises/#{identifier}.json?auth_token=#{@auth_token}")
+            JSON.parse response.body if response.body
+        end
+
         # This method returns statistic information about the crises.
         #
         # @return [Array] Returns the crises statistic as JSON object

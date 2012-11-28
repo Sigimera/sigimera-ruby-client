@@ -74,4 +74,21 @@ describe Sigimera::Client do
         end
     end
 
+    it "#get_crisis(identifier)" do
+        sleep 1 # Respect the courtesy limit and wait for one second
+        id = "a8763f7e2c432ebe897a68706dcf8dd49243774d"
+        crisis = @client.get_crisis(id)
+        crisis.class.should eql(Hash)
+        crisis['_id'].should eql(id)
+        crisis['dc_title'].should eql("Green flood alert in Australia")
+
+        sleep 1 # Respect the courtesy limit and wait for one second
+        crisis = @client.get_crisis("")
+        crisis.class.should eql(NilClass)
+
+        sleep 1 # Respect the courtesy limit and wait for one second
+        crisis = @client.get_crisis(nil)
+        crisis.class.should eql(NilClass)
+    end
+
 end
