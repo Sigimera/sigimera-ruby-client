@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Sigimera-ruby-client by Sigimera</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Sigimera-ruby-client</h1>
+          <h2>This repository includes a ruby client library for the REST API under http://api.sigimera.org</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/Sigimera/sigimera-ruby-client/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/Sigimera/sigimera-ruby-client/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/Sigimera/sigimera-ruby-client" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>Sigimera Client</h1>
+
+<p><a href="https://travis-ci.org/Sigimera/sigimera-ruby-client"><img src="https://secure.travis-ci.org/Sigimera/sigimera-ruby-client.png?branch=master" alt="Build
+Status"></a> <a href="https://codeclimate.com/github/Sigimera/sigimera-ruby-client"><img src="https://codeclimate.com/badge.png" alt="Code Climate"></a></p>
+
+<p>The following ruby gem encapsulates access to the Sigimera REST API under
+<a href="http://api.sigimera.org">http://api.sigimera.org</a>. It includes the needed SSL certificate for the
+HTTPS connections and a detailed documentation. This library will be
+developed in parallel to the API.</p>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<div class="highlight"><pre><span class="n">gem</span> <span class="s1">'sigimera'</span>
+</pre></div>
+
+<p>And then execute:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>bundle
+</pre></div>
+
+<p>Or install it yourself as:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>gem install sigimera
+</pre></div>
+
+<h2>Usage</h2>
+
+<p>This examples are only a short outline how to use the library. For more
+information read the documentation, checkout the rspecs or look into the
+source code. To use the library include or execute the following lines:</p>
+
+<div class="highlight"><pre>irb
+&gt;&gt; require <span class="s2">"sigimera"</span>
+&gt;&gt; puts Sigimera::Client.get_api_version
+&gt;&gt; puts Sigimera::Client.get_public_crises
+&gt;&gt; puts Sigimera::Client.get_public_rss_feed
+&gt;&gt; puts Sigimera::Client.get_auth_token<span class="o">(</span><span class="s2">"johndoe@example.org"</span>, <span class="s2">"verySecretPassword"</span><span class="o">)</span>
+
+<span class="c"># see http://api.sigimera.org/dashboard</span>
+&gt;&gt; <span class="nv">client</span> <span class="o">=</span> Sigimera::Client.new<span class="o">(</span><span class="s2">"YourSecretToken"</span><span class="o">)</span>
+or
+<span class="c"># The username and password are NOT stored, but only used to fetch an</span>
+<span class="c"># authentication token</span>
+&gt;&gt; <span class="nv">client</span> <span class="o">=</span> Sigimera::Client.new<span class="o">(</span><span class="nv">username</span> <span class="o">=</span> <span class="s2">"johndoe@example.org"</span>, <span class="nv">password</span> <span class="o">=</span> <span class="s2">"verySecretPassword"</span><span class="o">)</span>
+&gt;&gt; puts client.get_latest_crises
+&gt;&gt; puts client.get_latest_crises<span class="o">({</span> :type <span class="o">=</span>&gt; <span class="s2">"earthquakes"</span> <span class="o">})</span>
+&gt;&gt; puts client.get_crises_stat
+&gt;&gt; puts client.get_user_stat
+</pre></div>
+
+<h2>Start RSpec Tests</h2>
+
+<p>In order to test this library with the help of rspec you have get first an
+<em>authentication token</em> under the <a href="http://api.sigimera.org/dashboard">Developer Dashboard</a></p>
+
+<div class="highlight"><pre><span class="nb">export </span><span class="nv">AUTH_TOKEN</span><span class="o">=</span>YourSecretToken
+rake spec
+</pre></div>
+
+<h2>API Documentation</h2>
+
+<p>This library simplifies the Sigimera REST API. If you want learn more about
+this API you can use the following links:</p>
+
+<ul>
+<li><a href="http://api.sigimera.org/quickstart">Quickstart</a></li>
+<li><a href="http://api.sigimera.org/faq">FAQ</a></li>
+<li>
+<a href="http://api.sigimera.org/dashboard">Developer Dashboard</a>: You must be logged
+in.</li>
+</ul><h2>License</h2>
+
+<p>(c) 2012 by <a href="http://www.sigimera.org">Sigimera</a>,
+published under MIT license.</p>
+
+<h2>Warranty</h2>
+
+<p>This software is provided "as is" and without any express or implied
+warranties, including, without limitation, the implied warranties of
+merchantibility and fitness for a particular purpose.</p>
+        </section>
+
+        <footer>
+          Sigimera-ruby-client is maintained by <a href="https://github.com/Sigimera">Sigimera</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
