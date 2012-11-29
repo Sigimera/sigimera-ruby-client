@@ -3,6 +3,8 @@ Sigimera Client
 
 [![Build
 Status](https://secure.travis-ci.org/Sigimera/sigimera-ruby-client.png?branch=master)](https://travis-ci.org/Sigimera/sigimera-ruby-client) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/Sigimera/sigimera-ruby-client)
+[![Dependency
+Status](https://gemnasium.com/Sigimera/sigimera-ruby-client.png)](https://gemnasium.com/Sigimera/sigimera-ruby-client)
 
 The following ruby gem encapsulates access to the Sigimera REST API under
 http://api.sigimera.org. It includes the needed SSL certificate for the
