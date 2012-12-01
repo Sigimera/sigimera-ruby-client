@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
     gem.description   = "This is the official ruby library for the Sigimera REST API. It encapsulates the authentication process in a secure way and simplifies the access to the Crises Information Platform."
     gem.files         = `git ls-files`.split("\n")
     gem.require_paths = [ "lib" ]
+    gem.executables   << "sigimera"
 
     gem.add_runtime_dependency            "json"
     gem.add_runtime_dependency            "nokogiri"  # XML Parsing

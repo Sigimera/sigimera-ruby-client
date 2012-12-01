@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+#####
+# Copyright (c) 2012 by Sigimera
+# All rights reserved.
+# See MIT-LICENSE for permissions.
+#####
+require 'rubygems'
+require 'optparse'
+
+begin
+    require 'sigimera'
+rescue LoadError
+    STDERR.puts "Install the missing library:\n\t \e[0;36m$\e[m \e[0;32mgem install sigimera\e[m"
+    exit
+end
+
+begin
+    file = File.join(Dir.home, ".sigimera")
+    Dir.mkdir(File.join(Dir.home, ".sigimera"), 0700) unless File.directory? file
+    credentials = JSON.parse(File.read(File.join(file, "credentials.json")))
+    @auth_token = credentials['auth_token']
+rescue => e
+    STDERR.puts "Please execute:"
+    STDERR.puts "\t$ curl -X POST -u youremail@example.org https://api.sigimera.org/v1/tokens.json > ~/.sigimera/credentials.json"
+    exit 1
+end
+
+
+def make_api_call(options)
+    if @auth_token
+        @client = Sigimera::Client.new @auth_token
+        yield
+    else
+        STDERR.puts "Please execute:"
+        STDERR.puts "\t$ curl -X POST -u youremail@example.org https://api.sigimera.org/v1/tokens.json > ~/.sigimera/credentials.json"
+    end
+end
+
+options = {}
+
+opt_parser = OptionParser.new do |opt|
+    opt.banner = "Usage: sigimera COMMAND [OPTIONS] [ID]"
+    opt.separator  ""
+    opt.separator  "Commands"
+    opt.separator  "     get_latest_crises: retrieves the latest 10 crises"
+    opt.separator  "     get_crisis:        retrieves a single crisis with [ID]"
+    opt.separator  ""
+    opt.separator  "Options"
+
+    opt.on("-h","--help","help") do
+        STDOUT.puts opt_parser
+        exit
+    end
+end
+
+opt_parser.parse!
+
+case ARGV[0]
+when "get_latest_crises"
+    make_api_call(options) do
+        crises = @client.get_latest_crises :output => "short"
+        crises.each do |crisis|
+            STDOUT.puts "--------"
+            STDOUT.puts "ID     :   #{crisis['_id']}"
+            STDOUT.puts "Title  :   #{crisis['dc_title']}"
+            STDOUT.puts "Date   :   #{crisis['dc_date']}"
+            STDOUT.puts ""
+        end
+    end
+when "get_crisis"
+    if ARGV[1]
+        make_api_call(options) do
+            crisis = @client.get_crisis ARGV[1]
+            STDOUT.puts "============"
+            STDOUT.puts "ID         |   #{crisis['_id']}"
+            STDOUT.puts "Title      |   #{crisis['dc_title']}"
+            STDOUT.puts "Date       |   #{crisis['dc_date']}"
+            STDOUT.puts "Description|   #{crisis['dc_description']}"
+            STDOUT.puts ""
+        end
+    else
+        STDERR.puts "Please specify the identifier of the crisis."
+    end
+else
+    STDOUT.puts opt_parser
+end
