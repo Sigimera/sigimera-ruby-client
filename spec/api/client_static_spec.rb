@@ -10,6 +10,7 @@ describe Sigimera::Client do
 
     it ".get_auth_token(username, password)" do
         if @username and @password
+            sleep 1 # Respect the courtesy limit and wait for one second
             auth_token = Sigimera::Client.get_auth_token(username = @username, password = @password)
             auth_token.class.should eql(String)
             auth_token.should_not be_empty
@@ -41,5 +42,5 @@ describe Sigimera::Client do
         crises.xpath("/rss/channel/link/text()").to_s.should eql("http://www.sigimera.org/")
         crises.xpath("/rss/channel/item").size.should == 10
     end
- 
+
 end
