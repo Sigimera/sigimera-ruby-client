@@ -8,11 +8,7 @@
 # License::     MIT
 module Sigimera
 	# The Sigimera REST API Host
-	unless "development".eql? ENV['SIGIMERA_ENV']
-		API_HOST 	= "https://api.sigimera.org"
-	else
-		API_HOST 	= "http://localhost:9292"
-	end
+	API_HOST 	= "https://api.sigimera.org"
 
 	# The used SSL certificate for the HTTPS connection
 	CACERT_FILE	= File.expand_path("../../certs/cacert.crt", __FILE__)
