@@ -21,7 +21,7 @@ module Sigimera
 			@crisis[key.to_s] if @crisis and @crisis.class.eql?(Hash)
 		end
 
-		# Provides for each key a instance method
+		# Provides for each json key an instance method
 		def method_missing(method)
 			@crisis[method.to_s] if @crisis and @crisis.class.eql?(Hash) and @crisis.key?(method.to_s)
 		end

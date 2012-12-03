@@ -30,7 +30,7 @@ module Sigimera
         def self.get_public_crises
             client = Sigimera::Client.new
             response = client.get("/public/crises.json")
-            JSON.parse response.body if response
+            JSON.parse(response.body) if response
         end
 
         # This method returns the latest 10 crises as RSS feed,
@@ -66,7 +66,7 @@ module Sigimera
             endpoint = "/v1/crises.json?auth_token=#{@auth_token}"
             endpoint += "&#{URI.encode_www_form params}" if params
             response = self.get(endpoint.to_s)
-            JSON.parse response.body if response and response.body
+            JSON.parse(response.body) if response and response.body
         end
 
         # This method returns a single crisis.
@@ -78,7 +78,7 @@ module Sigimera
             endpoint = "/v1/crises/#{identifier}.json?auth_token=#{@auth_token}"
             endpoint += "&#{URI.encode_www_form params}" if params
             response = self.get(endpoint)
-            JSON.parse response.body if response and response.body
+            Sigimera::Crisis.new JSON.parse response.body if response and response.body
         end
 
         # This method returns statistic information about the crises.

@@ -96,7 +96,7 @@ describe Sigimera::Client do
         sleep 1 # Respect the courtesy limit and wait for one second
         id = "a8763f7e2c432ebe897a68706dcf8dd49243774d"
         crisis = @client.get_crisis(id)
-        crisis.class.should eql(Hash)
+        crisis.class.should eql(Sigimera::Crisis)
         crisis['_id'].should eql(id)
         crisis['dc_title'].should eql("Green flood alert in Australia")
         crisis['dc_subject'].class.should eql(Array)
@@ -115,7 +115,7 @@ describe Sigimera::Client do
         sleep 1 # Respect the courtesy limit and wait for one second
         id = "a8763f7e2c432ebe897a68706dcf8dd49243774d"
         crisis = @client.get_crisis(id, { :output => 'short' })
-        crisis.class.should eql(Hash)
+        crisis.class.should eql(Sigimera::Crisis)
         crisis['_id'].should eql(id)
         crisis['subject'].class.should eql(String)
         crisis['subject'].should eql("flood")
