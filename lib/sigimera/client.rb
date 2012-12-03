@@ -30,7 +30,7 @@ module Sigimera
         def self.get_public_crises
             client = Sigimera::Client.new
             response = client.get("/public/crises.json")
-            json_array_to_crisis_array(JSON.parse(response.body)) if response
+            Client.json_array_to_crisis_array(JSON.parse(response.body)) if response
         end
 
         # This method returns the latest 10 crises as RSS feed,
@@ -66,7 +66,7 @@ module Sigimera
             endpoint = "/v1/crises.json?auth_token=#{@auth_token}"
             endpoint += "&#{URI.encode_www_form params}" if params
             response = self.get(endpoint.to_s)
-            json_array_to_crisis_array(JSON.parse(response.body)) if response and response.body
+            Client.json_array_to_crisis_array(JSON.parse(response.body)) if response and response.body
         end
 
         # This method returns a single crisis.
@@ -101,7 +101,7 @@ module Sigimera
         # The authentication token that is used for the API calls.
         attr_reader :auth_token
 
-        def json_array_to_crisis_array json_array
+        def self.json_array_to_crisis_array json_array
             crises_array = Array.new
             json_array.each do |crisis|
                 crises_array << Sigimera::Crisis.new(crisis)
