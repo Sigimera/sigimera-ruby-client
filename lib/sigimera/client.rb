@@ -101,6 +101,7 @@ module Sigimera
         # The authentication token that is used for the API calls.
         attr_reader :auth_token
 
+        # Converts a JSON array into an array of #{Crisis} objects
         def self.json_array_to_crisis_array json_array
             crises_array = Array.new
             json_array.each do |crisis|
