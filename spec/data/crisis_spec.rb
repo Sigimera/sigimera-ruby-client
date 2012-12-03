@@ -43,7 +43,24 @@ describe Sigimera::Crisis do
 		test_hash['key1'].should eql("value1")
 		test_hash['key2'].class.should eql(String)
 		test_hash['key2'].should eql("value2")
+	end
 
+	it "#new nil" do
+		crisis = Sigimera::Crisis.new nil
+		crisis.no_method.should eql(nil)
+		crisis['no_key'].should eql(nil)
+	end
+
+	it "#new 'some string'" do
+		crisis = Sigimera::Crisis.new "some string"
+		crisis.no_method.should eql(nil)
+		crisis['no_key'].should eql(nil)
+	end
+
+	it "#new 23" do
+		crisis = Sigimera::Crisis.new 23
+		crisis.no_method.should eql(nil)
+		crisis['no_key'].should eql(nil)
 	end
 	
 end
