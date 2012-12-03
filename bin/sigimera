@@ -71,12 +71,16 @@ when "get_crisis"
     if ARGV[1]
         make_api_call(options) do
             crisis = @client.get_crisis ARGV[1]
-            STDOUT.puts "============"
-            STDOUT.puts "ID         |   #{crisis['_id']}"
-            STDOUT.puts "Title      |   #{crisis['dc_title']}"
-            STDOUT.puts "Date       |   #{crisis['dc_date']}"
-            STDOUT.puts "Description|   #{crisis['dc_description']}"
-            STDOUT.puts ""
+            if crisis
+                STDOUT.puts "============"
+                STDOUT.puts "ID         |   #{crisis['_id']}"
+                STDOUT.puts "Title      |   #{crisis['dc_title']}"
+                STDOUT.puts "Date       |   #{crisis['dc_date']}"
+                STDOUT.puts "Description|   #{crisis['dc_description']}"
+                STDOUT.puts ""
+            else
+                STDOUT.puts "No crisis could be found with the ID '#{ARGV[1]}'"
+            end
         end
     else
         STDERR.puts "Please specify the identifier of the crisis."
