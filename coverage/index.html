@@ -14,7 +14,7 @@
       <img src="./assets/0.7.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2012-11-28T20:13:56+01:00">2012-11-28T20:13:56+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2012-12-03T17:21:55+01:00">2012-12-03T17:21:55+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         3.3
+         5.63
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>3</b> files in total.
-    <b>83</b> relevant lines. 
-    <span class="green"><b>83</b> lines covered</span> and
+    <b>4</b> files in total.
+    <b>96</b> relevant lines. 
+    <span class="green"><b>96</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -53,9 +53,9 @@
       <tr>
         <td class="strong"><a href="#bc06df4d9fa9063a28346b4c110aa43530f89854" class="src_link" title="lib/sigimera.rb">lib/sigimera.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>19</td>
-        <td>6</td>
-        <td>6</td>
+        <td>21</td>
+        <td>7</td>
+        <td>7</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -63,11 +63,21 @@
       <tr>
         <td class="strong"><a href="#9a1b1dcbe599029936e463e2e442856c1e772034" class="src_link" title="lib/sigimera/client.rb">lib/sigimera/client.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>105</td>
-        <td>46</td>
-        <td>46</td>
+        <td>113</td>
+        <td>50</td>
+        <td>50</td>
         <td>0</td>
-        <td>1.9</td>
+        <td>3.2</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#6714f11278a7ac9abf74770420700d7039f65f98" class="src_link" title="lib/sigimera/data/crisis.rb">lib/sigimera/data/crisis.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>30</td>
+        <td>8</td>
+        <td>8</td>
+        <td>0</td>
+        <td>11.3</td>
       </tr>
       
       <tr>
@@ -101,8 +111,8 @@
     <h3>lib/sigimera.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>6</b> relevant lines. 
-      <span class="green"><b>6</b> lines covered</span> and
+      <b>7</b> relevant lines. 
+      <span class="green"><b>7</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -185,7 +195,7 @@
         <li class="never" data-hits="" data-linenumber="13">
           
           
-          <code class="ruby">	# The used SSL certificate for the HTTPS encrpytion</code>
+          <code class="ruby">	# The used SSL certificate for the HTTPS connection</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="14">
@@ -224,6 +234,18 @@
           <code class="ruby">require &quot;sigimera/client&quot;</code>
         </li>
       
+        <li class="never" data-hits="" data-linenumber="20">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require &quot;sigimera/data/crisis&quot;</code>
+        </li>
+      
     </ol>
   </pre>
 </div>
@@ -233,8 +255,8 @@
     <h3>lib/sigimera/client.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>46</b> relevant lines. 
-      <span class="green"><b>46</b> lines covered</span> and
+      <b>50</b> relevant lines. 
+      <span class="green"><b>50</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -437,7 +459,7 @@
         <li class="covered" data-hits="1" data-linenumber="33">
           <span class="hits">1</span>
           
-          <code class="ruby">            JSON.parse response.body if response</code>
+          <code class="ruby">            Client.json_array_to_crisis_array(JSON.parse(response.body)) if response</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="34">
@@ -653,7 +675,7 @@
         <li class="covered" data-hits="7" data-linenumber="69">
           <span class="hits">7</span>
           
-          <code class="ruby">            JSON.parse response.body if response and response.body</code>
+          <code class="ruby">            Client.json_array_to_crisis_array(JSON.parse(response.body)) if response and response.body</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="70">
@@ -725,7 +747,7 @@
         <li class="covered" data-hits="2" data-linenumber="81">
           <span class="hits">2</span>
           
-          <code class="ruby">            JSON.parse response.body if response and response.body</code>
+          <code class="ruby">            Sigimera::Crisis.new JSON.parse response.body if response and response.body</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="82">
@@ -863,10 +885,256 @@
         <li class="never" data-hits="" data-linenumber="104">
           
           
+          <code class="ruby">        # Converts a JSON array into an array of #{Crisis} objects</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="105">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        def self.json_array_to_crisis_array json_array</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="106">
+          <span class="hits">7</span>
+          
+          <code class="ruby">            crises_array = Array.new</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="107">
+          <span class="hits">7</span>
+          
+          <code class="ruby">            json_array.each do |crisis|</code>
+        </li>
+      
+        <li class="covered" data-hits="54" data-linenumber="108">
+          <span class="hits">54</span>
+          
+          <code class="ruby">                crises_array &lt;&lt; Sigimera::Crisis.new(crisis)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="109">
+          
+          
+          <code class="ruby">            end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="110">
+          
+          
+          <code class="ruby">        end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="111">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="112">
+          
+          
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="105">
+        <li class="never" data-hits="" data-linenumber="113">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="6714f11278a7ac9abf74770420700d7039f65f98">
+  <div class="header">
+    <h3>lib/sigimera/data/crisis.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>8</b> relevant lines. 
+      <span class="green"><b>8</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="never" data-hits="" data-linenumber="1">
+          
+          
+          <code class="ruby"># encoding: UTF-8</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby">#</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="3">
+          
+          
+          <code class="ruby"># This library encapsulates the Sigimera REST API access. For more information</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="4">
+          
+          
+          <code class="ruby"># about the API see http://api.sigimera.org</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="5">
+          
+          
+          <code class="ruby">#</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
+          
+          
+          <code class="ruby"># Author::      Alex Oberhauser (mailto:alex.oberhauser@sigimera.org)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby"># Copyright::   Copyright (c) 2012 Sigimera</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="8">
+          
+          
+          <code class="ruby"># License::     MIT</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="9">
+          <span class="hits">1</span>
+          
+          <code class="ruby">module Sigimera</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby">	# This class encapsulates the access to crisis JSON objects. </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby">	# Additional it simulates the access syntax of JSON objects.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby">	# For future use this class can implemente different type of checks.</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">	class Crisis</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="15">
+          <span class="hits">1</span>
+          
+          <code class="ruby">		def initialize json_object</code>
+        </li>
+      
+        <li class="covered" data-hits="60" data-linenumber="16">
+          <span class="hits">60</span>
+          
+          <code class="ruby">			@crisis = json_object</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="17">
+          
+          
+          <code class="ruby">		end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="18">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="19">
+          
+          
+          <code class="ruby">		# Simulates the same access as for JSON objects</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="20">
+          <span class="hits">1</span>
+          
+          <code class="ruby">		def [](key)</code>
+        </li>
+      
+        <li class="covered" data-hits="16" data-linenumber="21">
+          <span class="hits">16</span>
+          
+          <code class="ruby">			@crisis[key.to_s] if @crisis and @crisis.class.eql?(Hash)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">		end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="24">
+          
+          
+          <code class="ruby">		# Provides for each json key an instance method</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="25">
+          <span class="hits">1</span>
+          
+          <code class="ruby">		def method_missing(method)</code>
+        </li>
+      
+        <li class="covered" data-hits="9" data-linenumber="26">
+          <span class="hits">9</span>
+          
+          <code class="ruby">			@crisis[method.to_s] if @crisis and @crisis.class.eql?(Hash) and @crisis.key?(method.to_s)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby">		end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="28">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="29">
+          
+          
+          <code class="ruby">	end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="30">
           
           
           <code class="ruby">end</code>

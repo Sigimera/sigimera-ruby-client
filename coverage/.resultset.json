@@ -20,6 +20,8 @@
         null,
         1,
         1,
+        1,
+        null,
         1
       ],
       "/home/obale/sourcecode/sigimera/sigimera-meta/libs/sigimera-ruby-client/lib/sigimera/http_helper.rb": [
@@ -198,9 +200,49 @@
         1,
         null,
         null,
+        1,
+        7,
+        7,
+        54,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/home/obale/sourcecode/sigimera/sigimera-meta/libs/sigimera-ruby-client/lib/sigimera/data/crisis.rb": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        60,
+        null,
+        null,
+        null,
+        1,
+        16,
+        null,
+        null,
+        null,
+        1,
+        9,
+        null,
+        null,
+        null,
         null
       ]
     },
-    "timestamp": 1354130036
+    "timestamp": 1354551715
   }
 }
