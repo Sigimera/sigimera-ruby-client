@@ -11,7 +11,7 @@ module Sigimera
 	API_HOST 	= "https://api.sigimera.org"
 
 	# The used SSL certificate for the HTTPS connection
-	CACERT_FILE	= File.expand_path("../../certs/cacert.crt", __FILE__)
+	CACERT_FILE	= File.expand_path("../../certs/ca-bundle.crt", __FILE__)
 end
 
 require "sigimera/version"
