@@ -10,7 +10,7 @@ module Sigimera
         MINOR = 1
 
         # The tiny number stands for bug fixes.
-        TINY  = 0
+        TINY  = 1
 
         # The extra string marks the version as beta, alpha, rcX, ...
         EXTRA = nil
