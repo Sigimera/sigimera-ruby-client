@@ -1,6 +1,9 @@
 Sigimera Client
 ===============
 
+[![Gem
+Version](https://badge.fury.io/rb/sigimera.png)](http://badge.fury.io/rb/sigimera)
+
 [![Build
 Status](https://secure.travis-ci.org/Sigimera/sigimera-ruby-client.png?branch=master)](https://travis-ci.org/Sigimera/sigimera-ruby-client) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/Sigimera/sigimera-ruby-client)
 [![Dependency
@@ -45,6 +48,7 @@ source code. To use the library include or execute the following lines:
 ```sh
 irb
 >> require "sigimera"
+>> require "openssl"
 >> puts Sigimera::Client.get_api_version
 >> puts Sigimera::Client.get_public_crises
 >> puts Sigimera::Client.get_public_rss_feed
