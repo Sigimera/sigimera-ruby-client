@@ -39,7 +39,7 @@ describe Sigimera::Client do
     it ".get_public_rss_feed" do
         crises = Sigimera::Client.get_public_rss_feed
         crises.class.should eql(Nokogiri::XML::Document)
-        crises.xpath("/rss/channel/link/text()").to_s.should eql("http://www.sigimera.org/")
+        crises.xpath("/rss/channel/link/text()").to_s.should eql("http://crises.sigimera.org/")
         crises.xpath("/rss/channel/item").size.should == 10
     end
 
